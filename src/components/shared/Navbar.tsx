@@ -11,28 +11,24 @@ import { TiShoppingCart } from "react-icons/ti";
 import { useCart } from "@/Hook/useCart";
 import { CgProfile } from "react-icons/cg";
 import { IoIosArrowDown } from "react-icons/io";
-// Types for navigation items
+
+// Types
 interface NavItem {
   label: string;
   href?: string;
   icon: string;
   subItems?: SubItem[];
 }
-
 interface SubItem {
   label: string;
   href: string;
   icon: string;
 }
 
-// Navigation data
-const navItems: NavItem[] = [
+// Nav items
+const allNavItems: NavItem[] = [
   { label: "Home", href: "/", icon: "🏡" },
-  {
-    label: "Shop",
-    href: "/marketplace",
-    icon: "🛒",
-  },
+  { label: "Shop", href: "/marketplace", icon: "🛒" },
   {
     label: "Resources",
     icon: "▼",
@@ -41,7 +37,6 @@ const navItems: NavItem[] = [
       { label: "Government Schemes", href: "/resources/schemes", icon: "🏛️" },
     ],
   },
-
   {
     label: "Tools",
     icon: "▼",
@@ -55,7 +50,6 @@ const navItems: NavItem[] = [
   },
   {
     label: "Community",
-    href: "/community/forum",
     icon: "▼",
     subItems: [
       { label: "Farmer Forum", href: "/community/forum", icon: "🗣️" },
@@ -63,32 +57,51 @@ const navItems: NavItem[] = [
       { label: "Cooperative Groups", href: "/community/groups", icon: "👥" },
     ],
   },
-  { label: "Services", href: "/services", icon: "" },
-  { label: "Contact", href: "/contact", icon: "" },
+  { label: "Farmers", href: "/farmer", icon: "👨‍🌾" },
+  { label: "Services", href: "/services", icon: "🛠️" },
+  { label: "Contact", href: "/contact", icon: "☎️" },
 ];
 
-// NavItems component
-const NavItems = ({ isMobile = false }: { isMobile?: boolean }) => (
-  <ul className={isMobile ? "space-y-4" : "lg:flex hidden gap-6 items-center"}>
-    {navItems.map((item) =>
-      item.subItems ? (
-        <li key={item.label}>
-          <DropdownMenu item={item} />
-        </li>
-      ) : (
-        <li key={item.href}>
-          <Link
-            href={item.href!}
-            className="text-white lg:text-[#0D401C] hover:text-[#F8C32C] transition-colors flex items-center gap-1"
-          >
-            {item.icon} {item.label}
-          </Link>
-        </li>
-      )
-    )}
-  </ul>
-);
+// NavItems Component
+const NavItems = ({
+  isMobile = false,
+  role,
+}: {
+  isMobile?: boolean;
+  role?: string;
+}) => {
+  const filteredNavItems = allNavItems.filter((item) => {
+    if (["Resources", "Tools", "Community"].includes(item.label)) {
+      return role === "farmer"; // Only for farmers
+    }
+    return true;
+  });
 
+  return (
+    <ul
+      className={isMobile ? "space-y-4" : "lg:flex hidden gap-6 items-center"}
+    >
+      {filteredNavItems.map((item) =>
+        item.subItems ? (
+          <li key={item.label}>
+            <DropdownMenu item={item} />
+          </li>
+        ) : (
+          <li key={item.href}>
+            <Link
+              href={item.href!}
+              className="text-white lg:text-[#0D401C] hover:text-[#F8C32C] transition-colors flex items-center gap-1"
+            >
+              {item.icon} {item.label}
+            </Link>
+          </li>
+        )
+      )}
+    </ul>
+  );
+};
+
+// AuthSection Component
 const AuthSection = () => {
   const { data: session } = useSession();
   const { data: cartItem } = useCart();
@@ -134,7 +147,7 @@ const AuthSection = () => {
             </button>
           ) : (
             <button>
-              <div className="">
+              <div>
                 <CgProfile size={44} />
                 <span className="absolute bottom-0 bg-green-800 text-white rounded-full right-0">
                   <IoIosArrowDown />
@@ -143,7 +156,7 @@ const AuthSection = () => {
             </button>
           )}
           {isOpen && (
-            <div className="absolute right-0  w-48 bg-white shadow-lg rounded-md py-2 z-10 border border-gray-200">
+            <div className="absolute right-0 w-48 bg-white shadow-lg rounded-md py-2 z-10 border border-gray-200">
               {session ? (
                 <>
                   <Link
@@ -216,8 +229,10 @@ const AuthSection = () => {
   );
 };
 
+// Navbar Component
 const Navbar = () => {
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   const isDashboardPage =
     pathname.startsWith("/dashboard") || pathname.startsWith("/adminDashboard");
@@ -225,12 +240,11 @@ const Navbar = () => {
   return (
     <nav
       className={`${
-        isDashboardPage ? " border-b" : "shadow-md"
-      } z-50 top-0  sticky
-     bg-white `}
+        isDashboardPage ? "border-b" : "shadow-md"
+      } z-50 top-0 sticky bg-white`}
     >
       <Container
-        className={`px-5 relative  ${isDashboardPage ? "py-2" : "py-4"}`}
+        className={`px-5 relative ${isDashboardPage ? "py-2" : "py-4"}`}
       >
         <div className="flex justify-between items-center">
           <div
@@ -238,20 +252,21 @@ const Navbar = () => {
               isDashboardPage ? "lg:hidden" : ""
             } flex items-center`}
           >
-            <div className="hidden  lg:block">
+            <div className="hidden lg:block">
               <Link
                 href={"/"}
                 className={`${
                   isDashboardPage ? "hidden" : ""
-                } flex items-center `}
+                } flex items-center`}
               >
                 <Image src="/logo.png" alt="Logo" width={150} height={50} />
               </Link>
             </div>
-            <MobileNav links={<NavItems isMobile />} />
+            <MobileNav
+              links={<NavItems isMobile role={session?.user?.role} />}
+            />
           </div>
-          <NavItems />
-
+          <NavItems role={session?.user?.role} />
           <AuthSection />
         </div>
       </Container>

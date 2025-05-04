@@ -11,7 +11,7 @@ import { TbWorld } from "react-icons/tb";
 const TopInfoBar = () => {
   return (
     <section className="bg-[#155728] ">
-      <Container className="flex items-center px-5 justify-center lg:justify-between text-white py-1">
+      <Container className="flex items-center px-5 justify-center lg:justify-between text-white py-2">
         <div className=" w-fit hidden lg:flex items-center gap-4  px-5 font-normal text-sm ">
           <span className="bg-[#336040] p-2.5 rounded-full text-[#F8C32C]">
             <FaBell />

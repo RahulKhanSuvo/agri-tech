@@ -11,25 +11,25 @@ const steps = [
     step: 1,
     title: "STEP 01",
     description: "Choose your products",
-    icon: <FaRegLemon size={80} />,
+    icon: <FaRegLemon size={60} />,
   },
   {
     step: 2,
     title: "STEP 02",
     description: "Connect nearest farm",
-    icon: <FaTractor size={80} />,
+    icon: <FaTractor size={60} />,
   },
   {
     step: 3,
     title: "STEP 03",
     description: "Share your location",
-    icon: <FaMapMarkedAlt size={80} />,
+    icon: <FaMapMarkedAlt size={60} />,
   },
   {
     step: 4,
     title: "STEP 04",
     description: "Get delivered fast",
-    icon: <FaBoxOpen size={80} />,
+    icon: <FaBoxOpen size={60} />,
   },
 ];
 

@@ -57,7 +57,7 @@ const allNavItems: NavItem[] = [
       { label: "Cooperative Groups", href: "/community/groups", icon: "👥" },
     ],
   },
-  { label: "Farmers", href: "/farmer", icon: "👨‍🌾" },
+  // { label: "Farmers", href: "/farmer", icon: "👨‍🌾" },
   { label: "Services", href: "/services", icon: "🛠️" },
   { label: "Contact", href: "/contact", icon: "☎️" },
 ];

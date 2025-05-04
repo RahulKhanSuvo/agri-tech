@@ -7,17 +7,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 
-const marketplaceCategories = [
-  { name: "crops" },
-  { name: "livestock" },
-  { name: "Seeds & Plants" },
-  { name: "fertilizers" },
-  { name: "equipment" },
-  { name: "pesticides" },
-  { name: "Animal Feed" },
-  { name: "fisheries" },
-];
-
 type Inputs = {
   firstName: string;
   lastName: string;
@@ -93,7 +82,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <section className="max-w-4xl mx-auto p-6 bg-white border shadow-lg my-20">
+    <section className="max-w-4xl mx-auto p-6 bg-white border rounded-2xl shadow-lg my-20">
       <h2 className="text-2xl font-bold mb-6 text-center text-green-700">
         🌾 Your Account
       </h2>
@@ -196,7 +185,7 @@ export default function ProfilePage() {
         </div>
 
         {/* Categories */}
-        <div className="mb-3 col-span-2">
+        {/* <div className="mb-3 col-span-2">
           <label className="block font-semibold text-gray-700 mb-2">
             Categories
           </label>
@@ -213,7 +202,7 @@ export default function ProfilePage() {
               </label>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Submit Button */}
         <button

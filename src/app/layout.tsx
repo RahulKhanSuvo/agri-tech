@@ -38,7 +38,7 @@ export default function RootLayout({
         <QueryProvider>
           <GlobalContextProvider>
             <AuthProvider>
-              <Toaster position="top-right" reverseOrder={false} />
+              <Toaster position="bottom-right" reverseOrder={false} />
               <TopInfoBar />
               <Navbar />
               <main className="flex-1">{children}</main>

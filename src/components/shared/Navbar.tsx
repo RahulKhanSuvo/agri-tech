@@ -29,7 +29,7 @@ interface SubItem {
 const navItems: NavItem[] = [
   { label: "Home", href: "/", icon: "🏡" },
   {
-    label: "Market",
+    label: "Shop",
     href: "/marketplace",
     icon: "🛒",
   },

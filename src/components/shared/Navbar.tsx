@@ -72,7 +72,7 @@ const NavItems = ({
 }) => {
   const filteredNavItems = allNavItems.filter((item) => {
     if (["Resources", "Tools", "Community"].includes(item.label)) {
-      return role === "farmer"; // Only for farmers
+      return role === "farmer";
     }
     return true;
   });

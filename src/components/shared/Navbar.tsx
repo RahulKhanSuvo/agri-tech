@@ -106,110 +106,98 @@ const AuthSection = () => {
   return (
     <div>
       <div className="flex gap-1 md:gap-4">
-        <div className="relative">
+        <div
+          onMouseEnter={() => setIsOpen(true)}
+          onMouseLeave={() => setIsOpen(false)}
+          className="relative"
+        >
           {session ? (
-            <>
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="focus:outline-none"
-              >
-                {session.user?.image ? (
-                  <>
-                    <div className="relative">
-                      <Image
-                        src={session.user.image}
-                        alt="Profile"
-                        width={44}
-                        height={44}
-                        className="rounded-full"
-                      />
-                      <span className="absolute bottom-0 bg-green-800 text-white rounded-full right-0">
-                        <IoIosArrowDown />
-                      </span>
-                    </div>
-                  </>
-                ) : (
-                  <div className="w-[44px] h-[44px] bg-gray-300 rounded-full flex items-center justify-center text-[#0D401C]">
-                    {displayName[0]}
-                  </div>
-                )}
-              </button>
-            </>
-          ) : (
-            <>
-              <button onClick={() => setIsOpen(!isOpen)}>
+            <button className="focus:outline-none">
+              {session.user?.image ? (
                 <div className="relative">
-                  <CgProfile size={44} />
+                  <Image
+                    src={session.user.image}
+                    alt="Profile"
+                    width={44}
+                    height={44}
+                    className="rounded-full"
+                  />
                   <span className="absolute bottom-0 bg-green-800 text-white rounded-full right-0">
                     <IoIosArrowDown />
                   </span>
                 </div>
-              </button>
-            </>
-          )}
-          {isOpen &&
-            (session ? (
-              <>
-                <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-10 border border-gray-200">
-                  {session ? (
-                    <>
-                      <Link
-                        onClick={() => setIsOpen(!isOpen)}
-                        className="block px-4 py-2 text-[#0D401C] hover:bg-[#F8C32C] hover:text-white transition-all duration-300 font-semibold"
-                        href="/profile"
-                      >
-                        My Profile
-                      </Link>
-                      <Link
-                        onClick={() => setIsOpen(!isOpen)}
-                        className="block px-4 py-2 text-[#0D401C] hover:bg-[#F8C32C] hover:text-white transition-all duration-300 font-semibold"
-                        href={"/myOrder"}
-                      >
-                        My Orders
-                      </Link>
-                      <Link
-                        onClick={() => setIsOpen(!isOpen)}
-                        href={`${
-                          session.user.role === "farmer"
-                            ? "/dashboard"
-                            : "/adminDashboard"
-                        }`}
-                        className="block px-4 py-2 text-[#0D401C] hover:bg-[#F8C32C] hover:text-white transition-all duration-300 font-semibold"
-                      >
-                        Dashboard 📊
-                      </Link>
-                      <button
-                        onClick={handleLogout}
-                        className="w-full text-left px-4 py-2 text-[#0D401C] hover:bg-[#F8C32C] hover:text-white transition-all duration-300 font-semibold"
-                      >
-                        Logout
-                      </button>
-                    </>
-                  ) : (
-                    <></>
-                  )}
+              ) : (
+                <div className="w-[44px] h-[44px] bg-gray-300 rounded-full flex items-center justify-center text-[#0D401C]">
+                  {displayName[0]}
                 </div>
-              </>
-            ) : (
-              <>
-                <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md flex flex-col py-2 z-10 border border-gray-200">
+              )}
+            </button>
+          ) : (
+            <button>
+              <div className="">
+                <CgProfile size={44} />
+                <span className="absolute bottom-0 bg-green-800 text-white rounded-full right-0">
+                  <IoIosArrowDown />
+                </span>
+              </div>
+            </button>
+          )}
+          {isOpen && (
+            <div className="absolute right-0  w-48 bg-white shadow-lg rounded-md py-2 z-10 border border-gray-200">
+              {session ? (
+                <>
                   <Link
-                    onClick={() => setIsOpen(!isOpen)}
+                    onClick={() => setIsOpen(false)}
+                    className="block px-4 py-2 text-[#0D401C] hover:bg-[#F8C32C] hover:text-white transition-all duration-300 font-semibold"
+                    href="/profile"
+                  >
+                    My Profile
+                  </Link>
+                  <Link
+                    onClick={() => setIsOpen(false)}
+                    className="block px-4 py-2 text-[#0D401C] hover:bg-[#F8C32C] hover:text-white transition-all duration-300 font-semibold"
+                    href="/myOrder"
+                  >
+                    My Orders
+                  </Link>
+                  <Link
+                    onClick={() => setIsOpen(false)}
+                    href={
+                      session.user.role === "farmer"
+                        ? "/dashboard"
+                        : "/adminDashboard"
+                    }
+                    className="block px-4 py-2 text-[#0D401C] hover:bg-[#F8C32C] hover:text-white transition-all duration-300 font-semibold"
+                  >
+                    Dashboard 📊
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left px-4 py-2 text-[#0D401C] hover:bg-[#F8C32C] hover:text-white transition-all duration-300 font-semibold"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <div className="flex flex-col">
+                  <Link
+                    onClick={() => setIsOpen(false)}
                     href="/login"
                     className="w-full text-left px-4 py-2 text-[#0D401C] hover:bg-[#F8C32C] hover:text-white transition-all duration-300 font-semibold"
                   >
                     Login
                   </Link>
                   <Link
-                    onClick={() => setIsOpen(!isOpen)}
+                    onClick={() => setIsOpen(false)}
                     href="/register"
                     className="w-full text-left px-4 py-2 text-[#0D401C] hover:bg-[#F8C32C] hover:text-white transition-all duration-300 font-semibold"
                   >
                     Register
                   </Link>
                 </div>
-              </>
-            ))}
+              )}
+            </div>
+          )}
         </div>
 
         <div className="relative">

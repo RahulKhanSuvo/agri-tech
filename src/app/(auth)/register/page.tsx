@@ -25,18 +25,22 @@ const Register = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
 
-    const data = await registerUser(formData);
-
-    if (data.success) {
-      toast.success("Registration successful!");
-      router.push("/login");
-    } else {
-      toast.error("Something went wrong.");
+    try {
+      setLoading(true);
+      const data = await registerUser(formData);
+      if (data.success) {
+        toast.success("Registration successful!");
+        router.push("/login");
+      } else {
+        toast.error(data.message || "Registration failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+      toast.error("An error occurred during registration.");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (

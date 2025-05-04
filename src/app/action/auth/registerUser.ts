@@ -30,7 +30,7 @@ export const registerUser = async (payload: Payload) => {
         const result = await userCollection.insertOne({
             ...payload,
             password: hashedPassword,
-            role: role || "farmer",
+            role: role || "user",
         });
 
         return {

@@ -9,7 +9,7 @@ const TopInfoBar = () => {
         <div className="bg-[#FFFFFF17] w-fit hidden lg:flex items-center gap-4 py-2 px-5 font-normal text-sm rounded-3xl">
           <h5>Welcome to AgriTech</h5>
           <span className="size-1.5 bg-[#F8C32C] rounded-full"></span>
-          <h5>Agriculture & Organic Farms </h5>
+          <h5>Organic Shop </h5>
         </div>
         <div className=" lg:flex items-center lg:gap-14">
           {/* contract info */}

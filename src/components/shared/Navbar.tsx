@@ -173,17 +173,25 @@ const AuthSection = () => {
                   >
                     My Orders
                   </Link>
-                  <Link
-                    onClick={() => setIsOpen(false)}
-                    href={
-                      session.user.role === "farmer"
-                        ? "/dashboard"
-                        : "/adminDashboard"
-                    }
-                    className="block px-4 py-2 text-[#0D401C] hover:bg-[#F8C32C] hover:text-white transition-all duration-300 font-semibold"
-                  >
-                    Dashboard 📊
-                  </Link>
+                  {session.user.role === "farmer" && (
+                    <Link
+                      onClick={() => setIsOpen(false)}
+                      href="/dashboard"
+                      className="block px-4 py-2 text-[#0D401C] hover:bg-[#F8C32C] hover:text-white transition-all duration-300 font-semibold"
+                    >
+                      Dashboard 📊
+                    </Link>
+                  )}
+
+                  {session.user.role === "admin" && (
+                    <Link
+                      onClick={() => setIsOpen(false)}
+                      href="/adminDashboard"
+                      className="block px-4 py-2 text-[#0D401C] hover:bg-[#F8C32C] hover:text-white transition-all duration-300 font-semibold"
+                    >
+                      Admin Dashboard 🛠️
+                    </Link>
+                  )}
                   <button
                     onClick={handleLogout}
                     className="w-full text-left px-4 py-2 text-[#0D401C] hover:bg-[#F8C32C] hover:text-white transition-all duration-300 font-semibold"

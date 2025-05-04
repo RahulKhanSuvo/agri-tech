@@ -51,7 +51,7 @@ export default function MobileNav({ links }: MobileNavProps) {
           <div className="mb-6">
             <Image src="/logo.png" alt="Logo" width={150} height={50} />
           </div>
-          {links}
+          <div onClick={() => setMenuOpen(false)}>{links}</div>
         </ul>
       </div>
     </>

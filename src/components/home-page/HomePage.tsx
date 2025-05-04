@@ -5,11 +5,15 @@ import FAQSection from "./FAQ-section/FAQSection";
 import AboutUs from "./about-us-section/AboutUs";
 
 import PatnerSection from "./patner-section/partner-section";
+import Process from "../Process/Process";
+import FeturesProducts from "../FeturesProducts";
 
 const HomePage = () => {
   return (
     <section className="relative ">
       <HeroBanner />
+      <Process />
+      <FeturesProducts />
       <ServicesOverview />
       <AboutUs />
       <StatsOverview />

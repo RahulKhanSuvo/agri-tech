@@ -60,16 +60,27 @@ export const GET = async () => {
         const userEmail = session.user.email;
         const cartsCollection = await dbConnect(collectionNameObj.cartsCollection);
         const cart = await cartsCollection.findOne({ userEmail });
-        console.log(cart);
 
         if (!cart) {
             return NextResponse.json(
-                { message: "Cart not found", cart: null },
-                { status: 404 }
+                { message: "Cart not found", cart: [], totalQuantity: 0, totalPrice: 0 },
+                { status: 200 }
             );
         }
 
         const items = cart.items || [];
+        if (items.length === 0) {
+            return NextResponse.json(
+                {
+                    vendorEmail: cart.vendorEmail,
+                    cart: [],
+                    totalQuantity: 0,
+                    totalPrice: 0,
+                    status: "pending",
+                },
+                { status: 200 }
+            );
+        }
 
         let totalQuantity = 0;
         let totalPrice = 0;
@@ -85,7 +96,7 @@ export const GET = async () => {
         return NextResponse.json(
             {
                 vendorEmail: cart.vendorEmail,
-                cart: cart.items,
+                cart: items,
                 totalQuantity,
                 totalPrice,
                 status: "pending"
@@ -100,4 +111,5 @@ export const GET = async () => {
         );
     }
 };
+
 

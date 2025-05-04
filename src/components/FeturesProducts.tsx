@@ -30,7 +30,7 @@ export default async function FeturesProducts() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product: Product) => (
             <div key={product._id} className="bg-white  ">
-              <div className="w-full h-48 overflow-hidden rounded-lg">
+              <div className="w-full h-48 overflow-hidden rounded-lg border">
                 <Image
                   src={product.photoUrls[0]}
                   alt={product.productName}

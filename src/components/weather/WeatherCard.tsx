@@ -14,7 +14,6 @@ export function WeatherCard() {
 
   const fetchWeatherData = async (lat: number, lon: number) => {
     try {
-      // First fetch city name
       const cityData = await fetchCityFromCoordinates(lat, lon);
       setCity(cityData.name);
 

@@ -63,25 +63,12 @@ const allNavItems: NavItem[] = [
 ];
 
 // NavItems Component
-const NavItems = ({
-  isMobile = false,
-  role,
-}: {
-  isMobile?: boolean;
-  role?: string;
-}) => {
-  const filteredNavItems = allNavItems.filter((item) => {
-    if (["Resources", "Tools", "Community"].includes(item.label)) {
-      return role === "farmer";
-    }
-    return true;
-  });
-
+const NavItems = ({ isMobile = false }: { isMobile?: boolean }) => {
   return (
     <ul
       className={isMobile ? "space-y-4" : "lg:flex hidden gap-6 items-center"}
     >
-      {filteredNavItems.map((item) =>
+      {allNavItems.map((item) =>
         item.subItems ? (
           <li key={item.label}>
             <DropdownMenu item={item} />
@@ -189,7 +176,7 @@ const AuthSection = () => {
                       href="/adminDashboard"
                       className="block px-4 py-2 text-[#0D401C] hover:bg-[#F8C32C] hover:text-white transition-all duration-300 font-semibold"
                     >
-                      Admin Dashboard 🛠️
+                      Admin Dashboard
                     </Link>
                   )}
                   <button
@@ -270,11 +257,9 @@ const Navbar = () => {
                 <Image src="/logo.png" alt="Logo" width={150} height={50} />
               </Link>
             </div>
-            <MobileNav
-              links={<NavItems isMobile role={session?.user?.role} />}
-            />
+            <MobileNav links={<NavItems isMobile />} />
           </div>
-          <NavItems role={session?.user?.role} />
+          <NavItems />
           <AuthSection />
         </div>
       </Container>

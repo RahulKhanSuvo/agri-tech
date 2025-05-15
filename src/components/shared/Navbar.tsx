@@ -227,8 +227,6 @@ const AuthSection = () => {
 // Navbar Component
 const Navbar = () => {
   const pathname = usePathname();
-  const { data: session } = useSession();
-
   const isDashboardPage =
     pathname.startsWith("/dashboard") || pathname.startsWith("/adminDashboard");
 

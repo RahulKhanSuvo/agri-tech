@@ -1,6 +1,5 @@
 import React from "react";
 import ContainerSmall from "./shared/max-w-container/ContainerSmall";
-import axios from "axios";
 import Image from "next/image";
 
 interface Product {
@@ -13,10 +12,7 @@ interface Product {
 
 export default async function FeturesProducts() {
   try {
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/features`
-    );
-    const products = res.data;
+    const products: Product[] = [];
 
     return (
       <ContainerSmall className="mt-20 mb-20">

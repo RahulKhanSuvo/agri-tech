@@ -3,12 +3,12 @@ import React, { useState } from "react";
 interface SubItem {
   label: string;
   href: string;
-  icon: string;
+  icon?: string;
 }
 interface NavItem {
   label: string;
   href?: string;
-  icon: string;
+  icon?: string;
   subItems?: SubItem[];
 }
 export default function DropdownMenu({ item }: { item: NavItem }) {

@@ -1,5 +1,4 @@
 import TableData from "@/components/admin/Dashboard/TableData";
-import { headers } from "next/headers";
 interface Item {
   _id: string;
   productName: string;
@@ -13,20 +12,7 @@ interface Item {
   photos: string[];
 }
 export default async function Marketplace() {
-  let items: Item[] = [];
-  try {
-    const res = await fetch(
-      `${process.env.NEXTAUTH_URL}/api/adminDashboard/marketplace`,
-      {
-        headers: Object.fromEntries(await headers()),
-        cache: "force-cache",
-      }
-    );
-    const data = await res.json();
-    items = data.data;
-  } catch (error) {
-    console.log(error);
-  }
+  const items: Item[] = [];
   return (
     <div>
       <table className="min-w-full divide-y divide-gray-200 text-sm text-left ">
